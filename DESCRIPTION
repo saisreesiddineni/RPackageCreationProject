@@ -10,3 +10,5 @@ RoxygenNote: 7.2.3
 LinkingTo: Rcpp
 Imports: Rcpp, testthat
 suggests: testthat
+URL: https://github.com/saisreesiddineni/RPackageCreationProject
+BugReports: https://github.com/saisreesiddineni/RPackageCreationProject/issues
