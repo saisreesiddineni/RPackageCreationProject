@@ -1,27 +1,26 @@
 #' Gaussian Mixture Model Algorithm
-#' 
-#' This function takes in the data and returns the final estimates of mean, covariance 
-#' and prior weight values that maximize the likelihood using Gaussian Mixture Model Algorithm
 #'
-#' @param data input data that needs to be clustered [vector of values of type double]
-#' @param K number of clusters [integer value]
-#' @param max_iterations number of iterations [integer value]
+#' This function fits a Gaussian Mixture Model (GMM) to the input data using the Expectation-Maximization (EM) algorithm.
+#' @name fitGMM_interface
+#' @param data The input data matrix or data frame.
+#' @param numComponents The number of Gaussian components to fit in the GMM.
+#' @param max_iterations The maximum number of iterations for the EM algorithm.
 #'
-#' @return vector of mean, covariance and prior weight values
+#' @return A list containing the following components:
+#'   - 'mu' - A matrix of estimated means for each Gaussian component.
+#'   - 'sigma' - A list of estimated covariance matrices for each component.
+#'   - 'pi' - A vector of estimated mixing proportions for each component.
+#'   - 'log_likelihood' - The log-likelihood of the final GMM model.
+#'
 #' @export
 #'
 #' @examples
-#'  N <- 100
-#'  K <- 2 
-#'  max_iterations <- 100
-#'  data <- numeric(N)
-#'  set.seed(123)
-#'  data <- runif(N)
-#'  gmm_algo(data, K, max_iterations)
-gmm_algo <- function(data, K, max_iterations)
+#' data <- c(1.0, 2.0, 3.0, 4.0, 5.0)
+#' numComponents <- 2
+#' maxIters <- 100
+#' gmm_algo(data, numComponents, maxIters)
+gmm_algo <- function(data, numComponents, max_iterations)
 {
-  result.vec <- .C("fitGMM_interface", 
-                   data, K, max_iterations,
-                   PACKAGE = "RPackageCreationProject1")
-  result.vec
+  result.mat <- .Call("fitGMM_interface", data, numComponents, max_iterations)
+  result.mat
 }
